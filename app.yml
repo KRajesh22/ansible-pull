@@ -1,0 +1,13 @@
+- name: Setup web server
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install web server
+      package: 
+        name: httpd
+        state: installed
+        
+    - name: Start web service
+      service:
+        name: httpd
+        state: started
