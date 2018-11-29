@@ -1,5 +1,5 @@
 - name: Setup Web and app server 
-  hosts: all 
+  hosts: localhost
   become: yes
   roles:
     - stack
