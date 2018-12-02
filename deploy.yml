@@ -23,5 +23,6 @@
 
     - name: Copy Artifact from Jenkins 
       copy: 
-        src: "{{localout.files.path}}"
+        src: "{{item.path}}"
         dest: "{{TOMCAT_LOC}}/webapps/studentapp.war"
+      loop: "{{localout.files}}"
