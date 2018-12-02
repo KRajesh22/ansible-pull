@@ -1,0 +1,26 @@
+- name: Ansible Playbook to do the deployment
+  hosts: all
+  become: yes
+  vars:
+    APPUSER: studentapp
+    TOMCAT_LOC: /home/studentapp/apache-tomcat-9.0.13
+
+  tasks:
+    - name: Clean old applications
+      find:
+        paths: "{{TOMCAT_LOC}}"
+        file_type: any 
+      register: out 
+      become_user: "{{APPUSER}}"
+
+    - name: Find war file name
+      local_action: 
+        module: find
+        paths: /var/lib/jenkins/workspace/StudentProj-Compile/MAVEN/target
+        patterns: '*.war'
+      register: localout
+
+#    - name: Copy Artifact from Jenkins 
+#      copy: 
+#        src: "/var/lib/jenkins/workspace/StudentProj-Compile/MAVEN/target/stu"
+#        dest: "{{TOMCAT_LOC}}/webapps/studentapp.war"
