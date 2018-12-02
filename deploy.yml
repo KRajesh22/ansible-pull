@@ -8,7 +8,7 @@
   tasks:
     - name: Find old applications
       find:
-        paths: "{{TOMCAT_LOC}}"
+        paths: "{{TOMCAT_LOC}}/webapps"
         file_type: any 
       register: out 
       become_user: "{{APPUSER}}"
