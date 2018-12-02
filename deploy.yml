@@ -19,6 +19,7 @@
         paths: /var/lib/jenkins/workspace/StudentProj-Compile/MAVEN/target
         patterns: '*.war'
       register: localout
+      become: false
 
 #    - name: Copy Artifact from Jenkins 
 #      copy: 
