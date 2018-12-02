@@ -8,5 +8,5 @@ TOMCAT_PATH: "{{TOMCAT_HOME}}/{{TOMCAT_DIR}}"
 WAR_URL: https://github.com/citb32/project-setup/raw/master/student.war
 WAR_FILENAME: "{{WAR_URL.split('/') | last }}"
 JDBC_URL: https://github.com/citb32/project-setup/raw/master/mysql-connector-java-5.1.47.jar
-JDBC_FILENAME: "{{JDBC_URL.split('.') | last }}"
+JDBC_FILENAME: "{{JDBC_URL.split('/') | last }}"
 INIT_URL: https://raw.githubusercontent.com/citb32/project-setup/master/tomcat-init
