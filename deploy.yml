@@ -21,7 +21,7 @@
       register: localout
       become: false
 
-#    - name: Copy Artifact from Jenkins 
-#      copy: 
-#        src: "/var/lib/jenkins/workspace/StudentProj-Compile/MAVEN/target/stu"
-#        dest: "{{TOMCAT_LOC}}/webapps/studentapp.war"
+    - name: Copy Artifact from Jenkins 
+      copy: 
+        src: "{{localout.files.path}}"
+        dest: "{{TOMCAT_LOC}}/webapps/studentapp.war"
