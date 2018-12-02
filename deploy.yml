@@ -6,14 +6,21 @@
     TOMCAT_LOC: /home/studentapp/apache-tomcat-9.0.13
 
   tasks:
-    - name: Clean old applications
+    - name: Find old applications
       find:
         paths: "{{TOMCAT_LOC}}"
         file_type: any 
       register: out 
       become_user: "{{APPUSER}}"
 
-    - name: Find war file name
+    - name: Clean Old Applications
+      file:
+        path: "{{item.path}}"
+        state: absent
+      loop: "{{out.files}}"
+      become_user: "{{APPUSER}}"
+
+    - name: Find war file name in compiled output.
       local_action: 
         module: find
         paths: /var/lib/jenkins/workspace/StudentProj-Compile/MAVEN/target
