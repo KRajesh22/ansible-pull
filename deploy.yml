@@ -11,7 +11,7 @@
         paths: "{{TOMCAT_LOC}}/webapps"
         file_type: any 
       register: out 
-      become_user: "{{APPUSER}}"
+      #become_user: "{{APPUSER}}"
 
     - name: Clean Old Applications
       file:
