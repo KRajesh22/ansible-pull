@@ -33,3 +33,9 @@
         src: "{{item.path}}"
         dest: "{{TOMCAT_LOC}}/webapps/student.war"
       loop: "{{localout.files}}"
+
+    - name: Verify webapp has completed the deployment.
+      wait_for:
+        path: "{{TOMCAT_LOC}}/webapps/student"
+        state: present
+        timeout: 300
