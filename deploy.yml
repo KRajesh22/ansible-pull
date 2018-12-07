@@ -28,22 +28,21 @@
       register: localout
       become: false
 
-    - name: Copy Artifact from Jenkins 
-      copy: 
-        src: "{{item.path}}"
-        dest: "{{TOMCAT_LOC}}/webapps/student.war"
-      loop: "{{localout.files}}"
-
     - name: Clean log file 
       file:
         path: "{{TOMCAT_LOC}}/logs/catalina.out"
         state: absent
 
-    - name: Create log file 
-      file:
-        path: "{{TOMCAT_LOC}}/logs/catalina.out"
-        state: touch
-      become_user: "{{APPUSER}}"  
+    - name: Restart Tomcat
+      service:
+        name: tomcat
+        state: restarted
+
+    - name: Copy Artifact from Jenkins 
+      copy: 
+        src: "{{item.path}}"
+        dest: "{{TOMCAT_LOC}}/webapps/student.war"
+      loop: "{{localout.files}}" 
 
     - name: Verify webapp has completed the deployment.
       wait_for:
