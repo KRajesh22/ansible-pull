@@ -42,7 +42,7 @@
     - name: Create log file 
       file:
         path: "{{TOMCAT_LOC}}/logs/catalina.out"
-        state: present
+        state: touch
 
     - name: Verify webapp has completed the deployment.
       wait_for:
