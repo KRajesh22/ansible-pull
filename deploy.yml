@@ -34,8 +34,15 @@
         dest: "{{TOMCAT_LOC}}/webapps/student.war"
       loop: "{{localout.files}}"
 
+    - name: Clean log file 
+      file:
+        path: "{{TOMCAT_LOC}}/logs/catalina.out"
+        state: absent
+
     - name: Verify webapp has completed the deployment.
       wait_for:
-        path: "{{TOMCAT_LOC}}/webapps/student"
-        state: present
-        timeout: 300
+        path: "{{TOMCAT_LOC}}/logs/catalina.out"
+        search_regex: "org.apache.catalina.startup.HostConfig.deployWAR Deployment"
+        timeout: 600
+
+
