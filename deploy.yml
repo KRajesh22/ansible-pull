@@ -39,6 +39,11 @@
         path: "{{TOMCAT_LOC}}/logs/catalina.out"
         state: absent
 
+    - name: Create log file 
+      file:
+        path: "{{TOMCAT_LOC}}/logs/catalina.out"
+        state: present
+
     - name: Verify webapp has completed the deployment.
       wait_for:
         path: "{{TOMCAT_LOC}}/logs/catalina.out"
